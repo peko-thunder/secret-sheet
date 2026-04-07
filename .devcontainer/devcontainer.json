@@ -21,5 +21,10 @@
     "source=claude-code-bash-history-${devcontainerId},target=/command-history,type=volume",
     "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume"
   ],
+  "remoteEnv": {
+    "TZ": "Asia/Tokyo",
+    "LANG": "en_US.UTF-8",
+    "LC_ALL": "C.UTF-8"
+  },
   "postCreateCommand": "go mod download && bash ${containerWorkspaceFolder}/.devcontainer/scripts/install-claude-code.sh && bash ${containerWorkspaceFolder}/.devcontainer/scripts/persist-bash-history.sh"
 }
