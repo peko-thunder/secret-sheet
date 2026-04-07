@@ -1,20 +1,25 @@
 {
-  "name": "sheet-password",
+  "name": "secret-sheet",
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "hostRequirements": {
+    "memory": "6gb"
+  },
   "customizations": {
     "vscode": {
-      "extensions": [
-        "golang.go"
-      ],
+      "extensions": ["golang.go"],
       "settings": {
+        "chat.disableAIFeatures": true,
         "go.toolsManagement.checkForUpdates": "local",
         "go.useLanguageServer": true,
         "go.gopath": "/go"
       }
     }
   },
-  "postCreateCommand": "go mod download",
-  "remoteUser": "root"
+  "mounts": [
+    "source=claude-code-bash-history-${devcontainerId},target=/command-history,type=volume",
+    "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume"
+  ],
+  "postCreateCommand": "go mod download && bash ${containerWorkspaceFolder}/.devcontainer/scripts/install-claude-code.sh && bash ${containerWorkspaceFolder}/.devcontainer/scripts/persist-bash-history.sh"
 }
