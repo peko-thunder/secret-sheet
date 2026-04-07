@@ -1,0 +1,17 @@
+dist/
+
+# Built binary
+sheet-env
+sheet-env.exe
+
+# Credentials — never commit these
+*.json
+!go.sum
+
+# Config files may contain spreadsheet IDs — add to .gitignore in each project
+.sheetenv
+
+# Local .env files
+.env
+.env.*
+!.env.example
